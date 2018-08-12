@@ -1,0 +1,66 @@
+logging:
+  level:
+    org.springframework.cloud.netflix.zuul.filters.post.SendErrorFilter: error
+
+server:
+  port: 10003
+
+turbine:
+  stream:
+    port: 8088
+#security:
+# user:
+#  name: admin
+#  password: 123123
+# basic:
+#  enabled: false
+
+spring:
+  application:
+    name: monitor
+  boot:
+    admin:
+      routes:
+        endpoints: env,metrics,trace,dump,jolokia,info,configprops,trace,logfile,refresh,flyway,liquibase,heapdump,loggers,auditevents,hystrix.stream
+      turbine:
+        clusters: default
+        location: http://localhost:${turbine.stream.port}/
+  rabbitmq:
+    host: dolojia.cn
+    port: 5672
+    username: admin
+    password: admin
+
+#    admin:
+#      turbine:
+#        clusterConfig: SERVICE-FEIGN
+#        #设置需要监控的serviceId
+#        appConfig: service-feign
+#        clusterNameExpression: "service-feign"
+#        # 默认为 true，让同一个主机上面的服务通过主机名与端口号的组合来区分
+#        combineHostPort: true
+#设置turbine端点的service-id，由于目前turbine功能已经集成到了admin-cloud-server程序中，所以这里填写的是该程序注册到注册中心的service-Id
+#      routes:
+#        endpoints: env,metrics,dump,jolokia,info,configprops,trace,logfile,refresh,flyway,liquibase,heapdump,loggers,auditevents,hystrix.stream
+
+
+management:
+  security:
+    enabled: false
+
+eureka:
+  instance:
+    hostname: registry
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:10001/eureka/
+
+info:
+  build:
+    name: @project.name@
+    description: @project.description@
+    groupId: @project.groupId@
+    artifact: @project.artifactId@
+    version: @project.version@
+

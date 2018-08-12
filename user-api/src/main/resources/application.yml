@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: user-api
+  rabbitmq:
+    host: dolojia.cn
+    port: 5672
+    username: admin
+    password: admin
+
+server:
+  port: 10006
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:10001/eureka/
+feign:
+  hystrix:
+    enabled: true
+  httpclient:
+    enabled: true
+
+management:
+  security:
+    enabled: false
+
+info:
+  build:
+    name: @project.name@
+    description: @project.description@
+    groupId: @project.groupId@
+    artifact: @project.artifactId@
+    version: @project.version@

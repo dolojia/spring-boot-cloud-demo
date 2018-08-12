@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: zipkin-server
+  rabbitmq:
+    host: dolojia.cn
+    port: 5672
+    username: admin
+    password: admin
+
+server:
+  port: 10005
+
+security:
+  user:
+    name: admin
+    password: ${ZIPKIN_SERVER_PASSWORD:admin}
